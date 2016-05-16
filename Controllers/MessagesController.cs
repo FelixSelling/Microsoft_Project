@@ -24,7 +24,7 @@ namespace Microsoft_Project
             {
                 // calculate something for us to return
                 int length = (message.Text ?? string.Empty).Length;
-
+                //HÄR SKA KODEN STÅ
                 // return our reply to the user
                 return message.CreateReplyMessage($"You sent {length} characters");
             }
