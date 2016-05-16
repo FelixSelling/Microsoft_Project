@@ -23,22 +23,22 @@ namespace Microsoft_Project
             if (message.Type == "Message")
             {
 
-                string stensaxpåse = message.Text.ToLower();
+                string inputMessage = message.Text.ToLower();
  
                 Random rng = new Random();
                 int bot = rng.Next(3);
                 //0=sten 1=sax 2=påse
-                switch (stensaxpåse)
+                switch (inputMessage)
                 {
                     case "sten":
-                        return message.CreateReplyMessage(stensaxpåse);
+                        return message.CreateReplyMessage(inputMessage);
                     case "sax":
-                        return message.CreateReplyMessage(stensaxpåse);
+                        return message.CreateReplyMessage(inputMessage);
                     case "påse":
-                        return message.CreateReplyMessage(stensaxpåse);
+                        return message.CreateReplyMessage(inputMessage);
                 }
 
-                return message.CreateReplyMessage("sajk"+ bot);
+                return message.CreateReplyMessage(");
 
                 // return our reply to the user
 
