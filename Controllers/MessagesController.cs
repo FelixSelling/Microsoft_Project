@@ -22,25 +22,6 @@ namespace Microsoft_Project
         {
             if (message.Type == "Message")
             {
-
-<<<<<<< HEAD
-                string inputMessage = message.Text.ToLower();
- 
-                Random rng = new Random();
-                int bot = rng.Next(3);
-                //0=sten 1=sax 2=påse
-                switch (inputMessage)
-                {
-                    case "sten":
-                        return message.CreateReplyMessage(inputMessage);
-                    case "sax":
-                        return message.CreateReplyMessage(inputMessage);
-                    case "påse":
-                        return message.CreateReplyMessage(inputMessage);
-                }
-
-                return message.CreateReplyMessage(");
-=======
                 string stensaxpåse = message.Text.ToLower();
                 Random rng = new Random();
                 int bot = rng.Next(3);
@@ -75,7 +56,6 @@ namespace Microsoft_Project
                 }
 
                 return message.CreateReplyMessage(resultat);
->>>>>>> refs/remotes/origin/Felix-1.2
 
                 // return our reply to the user
 
