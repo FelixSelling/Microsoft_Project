@@ -26,7 +26,7 @@ namespace Microsoft_Project
                 int length = (message.Text ?? string.Empty).Length;
                 //HÄR SKA KODEN STÅ TROR JAG
                 // return our reply to the user
-                return message.CreateReplyMessage($"You sent {length} characters");
+                return message.CreateReplyMessage($"You sent {length} characters, Yolo!");
             }
             else
             {
