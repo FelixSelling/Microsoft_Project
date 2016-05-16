@@ -24,7 +24,6 @@ namespace Microsoft_Project
             {
 
                 string stensaxpåse = message.Text.ToLower();
- 
                 Random rng = new Random();
                 int bot = rng.Next(3);
                 //0=sten 1=sax 2=påse
