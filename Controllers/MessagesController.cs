@@ -28,17 +28,36 @@ namespace Microsoft_Project
                 Random rng = new Random();
                 int bot = rng.Next(3);
                 //0=sten 1=sax 2=påse
+                string resultat="";
                 switch (stensaxpåse)
                 {
                     case "sten":
-                        return message.CreateReplyMessage(stensaxpåse);
+                        switch(bot)
+                        {
+                            case 0: resultat = "Lika"; break;
+                            case 1: resultat = "Vinst"; break;
+                            case 2: resultat = "Förlust"; break;
+                        }
+                        break;
                     case "sax":
-                        return message.CreateReplyMessage(stensaxpåse);
+                        switch (bot)
+                        {
+                            case 1: resultat = "Lika"; break;
+                            case 2: resultat = "Vinst"; break;
+                            case 0: resultat = "Förlust"; break;
+                        }
+                        break;
                     case "påse":
-                        return message.CreateReplyMessage(stensaxpåse);
+                        switch (bot)
+                        {
+                            case 2: resultat = "Lika"; break;
+                            case 0: resultat = "Vinst"; break;
+                            case 1: resultat = "Förlust"; break;
+                        }
+                        break;
                 }
 
-                return message.CreateReplyMessage("sajk"+ bot);
+                return message.CreateReplyMessage(resultat);
 
                 // return our reply to the user
 
