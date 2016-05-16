@@ -27,7 +27,7 @@ namespace Microsoft_Project
  
                 Random rng = new Random();
                 int bot = rng.Next(3);
-                //0=sten 1=sax 2=påses
+                //0=sten 1=sax 2=påse
                 switch (stensaxpåse)
                 {
                     case "sten":
