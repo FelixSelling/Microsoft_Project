@@ -24,7 +24,7 @@ namespace Microsoft_Project
             {
                 // calculate something for us to return
                 int length = (message.Text ?? string.Empty).Length;
-                //HÄR SKA KODEN STÅ TROR JAG
+
                 // return our reply to the user
                 return message.CreateReplyMessage($"You sent {length} characters, Yolo!");
             }
@@ -49,6 +49,8 @@ namespace Microsoft_Project
             }
             else if (message.Type == "BotAddedToConversation")
             {
+                var replyMessage = message.CreateReplyMessage("Hi, how are you?", "en");
+                return replyMessage;
             }
             else if (message.Type == "BotRemovedFromConversation")
             {
