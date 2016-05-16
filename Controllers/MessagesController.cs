@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,50 +23,65 @@ namespace Microsoft_Project
         /// </summary>
         public async Task<Message> Post([FromBody]Message message)
         {
-            if (message.Type == "Message")
+            using (SqlConnection connection = new SqlConnection("Server = tcp:annabot.database.windows.net,1433; Data Source = annabot.database.windows.net; Initial Catalog = anna; Persist Security Info = False; User ID = FelixErik; Password = ErikFelix97; Pooling = False; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;"))
             {
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
 
-                string stensaxpåse = message.Text.ToLower();
-                Random rng = new Random();
-                int bot = rng.Next(3);
-                //0=sten 1=sax 2=påse
-                string resultat="";
-                switch (stensaxpåse)
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"
+                    SELECT pointsPlayer, pointsBot
+                    FROM Score";
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (message.Type == "Message")
                 {
-                    case "sten":
-                        switch(bot)
-                        {
-                            case 0: resultat = "Lika"; break;
-                            case 1: resultat = "Vinst"; break;
-                            case 2: resultat = "Förlust"; break;
-                        }
-                        break;
-                    case "sax":
-                        switch (bot)
-                        {
-                            case 1: resultat = "Lika"; break;
-                            case 2: resultat = "Vinst"; break;
-                            case 0: resultat = "Förlust"; break;
-                        }
-                        break;
-                    case "påse":
-                        switch (bot)
-                        {
-                            case 2: resultat = "Lika"; break;
-                            case 0: resultat = "Vinst"; break;
-                            case 1: resultat = "Förlust"; break;
-                        }
-                        break;
+
+                    string stensaxpåse = message.Text.ToLower();
+                    Random rng = new Random();
+                    int bot = rng.Next(3);
+                    //0=sten 1=sax 2=påse
+                    string resultat = "";
+                    switch (stensaxpåse)
+                    {
+                        case "sten":
+                            switch (bot)
+                            {
+                                case 0: resultat = "Lika"; break;
+                                case 1: resultat = "Vinst"; break;
+                                case 2: resultat = "Förlust"; break;
+                            }
+                            break;
+                        case "sax":
+                            switch (bot)
+                            {
+                                case 1: resultat = "Lika"; break;
+                                case 2: resultat = "Vinst"; break;
+                                case 0: resultat = "Förlust"; break;
+                            }
+                            break;
+                        case "påse":
+                            switch (bot)
+                            {
+                                case 2: resultat = "Lika"; break;
+                                case 0: resultat = "Vinst"; break;
+                                case 1: resultat = "Förlust"; break;
+                            }
+                            break;
+                    }
+
+                    return message.CreateReplyMessage(resultat + " och din poäng är: " + reader[0]);
+
+                    // return our reply to the user
+
                 }
-
-                return message.CreateReplyMessage(resultat);
-
-                // return our reply to the user
-
-            }
-            else
-            {
-                return HandleSystemMessage(message);
+                else
+                {
+                    return HandleSystemMessage(message);
+                }
             }
         }
 
