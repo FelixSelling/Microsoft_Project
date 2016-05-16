@@ -22,11 +22,26 @@ namespace Microsoft_Project
         {
             if (message.Type == "Message")
             {
-                // calculate something for us to return
-                int length = (message.Text ?? string.Empty).Length;
-                //HÄR SKA KODEN STÅ
+
+                string stensaxpåse = message.Text.ToLower();
+ 
+                Random rng = new Random();
+                int bot = rng.Next(3);
+                //0=sten 1=sax 2=påse
+                switch (stensaxpåse)
+                {
+                    case "sten":
+                        return message.CreateReplyMessage(stensaxpåse);
+                    case "sax":
+                        return message.CreateReplyMessage(stensaxpåse);
+                    case "påse":
+                        return message.CreateReplyMessage(stensaxpåse);
+                }
+
+                return message.CreateReplyMessage("sajk"+ bot);
+
                 // return our reply to the user
-                return message.CreateReplyMessage($"You sent {length} characters");
+
             }
             else
             {
